@@ -10,7 +10,7 @@ USER_HOME="/home/trevor"
 echo "--- Running Printer Script at $(date) ---"
 
 # Load NVM using the absolute path. This is the key fix. 🗺️
-export NVM_DIR="$USER_HOME/.config/.nvm"
+export NVM_DIR="$USER_HOME/.config/nvm"
 if [ -s "$NVM_DIR/nvm.sh" ]; then
   \. "$NVM_DIR/nvm.sh"
   echo "NVM script sourced from $NVM_DIR"
