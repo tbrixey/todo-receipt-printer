@@ -1,10 +1,29 @@
 #!/bin/bash
-# Source NVM
+
+# --- CONFIGURATION ---
+# Set the Node.js major version that your project needs (e.g., 16, 18, 20)
+NODE_VERSION="22"
+# Set the absolute path to your project
+PROJECT_DIR="/home/trevor/Documents/todo-receipt-printer/pi"
+# --- END CONFIGURATION ---
+
+# Load NVM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
 
-# Optional: Go to the project directory
-cd /home/trevor/Documents/todo-receipt-printer/pi
+# Add a message to our log file to show the script has started
+echo "--- Running Printer Script at $(date) ---"
 
-nvm use default
-node dist/index.js
+# Explicitly use the correct node version
+echo "Attempting to switch to Node.js v${NODE_VERSION}"
+nvm use ${NODE_VERSION}
+
+# Log the version of node that is actually being used now
+echo "Now using Node version: $(node -v)"
+
+# Change to the project directory
+cd "$PROJECT_DIR"
+echo "Running script in directory: $(pwd)"
+
+# Run the script
+node index.js
