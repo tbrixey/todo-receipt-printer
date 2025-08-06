@@ -1,29 +1,34 @@
 #!/bin/bash
 
 # --- CONFIGURATION ---
-# Set the Node.js major version that your project needs (e.g., 16, 18, 20)
 NODE_VERSION="22"
-# Set the absolute path to your project
-PROJECT_DIR="/home/trevor/Documents/todo-receipt-printer/pi"
+PROJECT_DIR="/home/pi/Documents/todo-receipt-printer/pi/dist"
+# Use the full, absolute path to your home directory
+USER_HOME="/home/trevor"
 # --- END CONFIGURATION ---
 
-# Load NVM
-export NVM_DIR="$HOME/.config/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  
-
-# Add a message to our log file to show the script has started
 echo "--- Running Printer Script at $(date) ---"
 
-# Explicitly use the correct node version
-echo "Attempting to switch to Node.js v${NODE_VERSION}"
-nvm use ${NODE_VERSION}
+# Load NVM using the absolute path. This is the key fix. 🗺️
+export NVM_DIR="$USER_HOME/.config/.nvm"
+if [ -s "$NVM_DIR/nvm.sh" ]; then
+  \. "$NVM_DIR/nvm.sh"
+  echo "NVM script sourced from $NVM_DIR"
+else
+  echo "ERROR: NVM script not found at $NVM_DIR"
+  exit 1
+fi
 
-# Log the version of node that is actually being used now
-echo "Now using Node version: $(node -v)"
+# Check if the nvm command is now available
+if command -v nvm &> /dev/null; then
+    echo "NVM command is available."
+    nvm use ${NODE_VERSION}
+    echo "Now using Node version: $(node -v)"
 
-# Change to the project directory
-cd "$PROJECT_DIR"
-echo "Running script in directory: $(pwd)"
-
-# Run the script
-node index.js
+    cd "$PROJECT_DIR"
+    echo "Running script in directory: $(pwd)"
+    node index.js
+else
+    echo "FATAL ERROR: NVM command not found even after sourcing."
+    exit 1
+fi
