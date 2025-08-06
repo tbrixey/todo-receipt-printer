@@ -2,7 +2,7 @@
 
 # --- CONFIGURATION ---
 NODE_VERSION="22"
-PROJECT_DIR="/home/pi/Documents/todo-receipt-printer/pi/dist"
+PROJECT_DIR="/home/trevor/Documents/todo-receipt-printer/pi/dist"
 # Use the full, absolute path to your home directory
 USER_HOME="/home/trevor"
 # --- END CONFIGURATION ---
@@ -23,7 +23,6 @@ fi
 if command -v nvm &> /dev/null; then
     echo "NVM command is available."
     nvm use ${NODE_VERSION}
-    echo "Now using Node version: $(node -v)"
 
     cd "$PROJECT_DIR"
     echo "Running script in directory: $(pwd)"
