@@ -9,6 +9,8 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
+const divider = "--------------------------------";
+
 const main = async () => {
   const client = await pool.connect();
   const res = await client.query(
@@ -39,12 +41,16 @@ const main = async () => {
         .text(row.priority)
         .style("NORMAL")
         .size(1, 1)
-        .text("--------------------------------")
+        .text(divider)
         .align("lt")
         .text("description:")
         .align("ct")
         .text(row.description)
-        .newLine(4);
+        .text(divider);
+
+      await printer.qrimage(row.url);
+
+      printer.newLine(4);
 
       printer.cut().close();
 
