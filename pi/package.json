@@ -1,0 +1,24 @@
+{
+  "name": "receipt-printer-pi",
+  "version": "1.0.0",
+  "description": "Code to run on the raspberry pi that connects to the receipt printer",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js",
+    "build": "tsc"
+  },
+  "author": "Trevor Brixey",
+  "license": "MIT",
+  "packageManager": "pnpm@9.14.4+sha512.c8180b3fbe4e4bca02c94234717896b5529740a6cbadf19fa78254270403ea2f27d4e1d46a08a0f56c89b63dc8ebfd3ee53326da720273794e6200fcf0d184ab",
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "@types/pg": "^8.15.5"
+  },
+  "dependencies": {
+    "@node-escpos/core": "^0.6.0",
+    "@node-escpos/usb-adapter": "^0.3.1",
+    "pg": "^8.16.3"
+  }
+}
