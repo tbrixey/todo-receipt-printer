@@ -22,7 +22,7 @@ const main = async () => {
     process.exit(0);
   }
 
-  for (const row of res.rows) {
+  for await (const row of res.rows) {
     device.open(async function (error) {
       if (error) {
         console.error(error);
@@ -53,7 +53,8 @@ const main = async () => {
       ]);
     });
   }
-  process.exit(0);
+
+  client.release();
 };
 
 main();
