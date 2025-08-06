@@ -49,7 +49,9 @@ const main = async () => {
           .text(row.description)
           .text(divider);
 
-        await printer.qrimage(row.url);
+        if (row.url) {
+          await printer.qrimage(row.url);
+        }
 
         printer.newLine(4);
 
