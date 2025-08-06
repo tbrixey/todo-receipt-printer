@@ -55,7 +55,7 @@ const main = async () => {
 
         printer.newLine(4);
 
-        printer.cut();
+        printer.cut().close();
 
         await client.query("UPDATE to_print SET printed = true WHERE id = $1", [
           row.id,
@@ -65,7 +65,6 @@ const main = async () => {
     });
   }
 
-  device.close();
   pool.end();
   process.exit(0);
 };
