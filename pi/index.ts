@@ -15,10 +15,10 @@ const main = async () => {
     "SELECT * FROM to_print WHERE printed = false"
   );
   console.log(res.rows);
-  client.release();
 
   if (res.rows.length === 0) {
     console.log("No tasks to print");
+    pool.end();
     process.exit(0);
   }
 
@@ -54,7 +54,7 @@ const main = async () => {
     });
   }
 
-  client.release();
+  pool.end();
 };
 
 main();
