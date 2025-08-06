@@ -25,38 +25,41 @@ const main = async () => {
   }
 
   for await (const row of res.rows) {
-    device.open(async function (error) {
-      if (error) {
-        console.error(error);
-        return;
-      }
-      const options = { encoding: "GB18030" /* default */ };
-      let printer = new Printer(device, options);
+    await new Promise<void>((resolve, reject) => {
+      device.open(async function (error) {
+        if (error) {
+          console.error(error);
+          return reject(error);
+        }
+        const options = { encoding: "GB18030" /* default */ };
+        let printer = new Printer(device, options);
 
-      printer
-        .font("a")
-        .size(2, 2)
-        .align("ct")
-        .style("B")
-        .text(row.priority)
-        .style("NORMAL")
-        .size(1, 1)
-        .text(divider)
-        .align("lt")
-        .text("description:")
-        .align("ct")
-        .text(row.description)
-        .text(divider);
+        printer
+          .font("a")
+          .size(2, 2)
+          .align("ct")
+          .style("B")
+          .text(row.priority)
+          .style("NORMAL")
+          .size(1, 1)
+          .text(divider)
+          .align("lt")
+          .text("description:")
+          .align("ct")
+          .text(row.description)
+          .text(divider);
 
-      await printer.qrimage(row.url);
+        await printer.qrimage(row.url);
 
-      printer.newLine(4);
+        printer.newLine(4);
 
-      printer.cut().close();
+        printer.cut().close();
 
-      await client.query("UPDATE to_print SET printed = true WHERE id = $1", [
-        row.id,
-      ]);
+        await client.query("UPDATE to_print SET printed = true WHERE id = $1", [
+          row.id,
+        ]);
+        resolve();
+      });
     });
   }
 
