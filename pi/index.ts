@@ -61,6 +61,7 @@ const main = async () => {
   }
 
   pool.end();
+  process.exit(0);
 };
 
 main();
