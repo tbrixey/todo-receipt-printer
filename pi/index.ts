@@ -49,7 +49,7 @@ const main = async () => {
           .text(row.description)
           .text(divider);
 
-        if (row.url) {
+        if (row.url && row.url !== "") {
           await printer.qrimage(row.url);
         }
 
