@@ -14,9 +14,9 @@ importers:
       '@node-escpos/usb-adapter':
         specifier: ^0.3.1
         version: 0.3.1
-      '@types/pg':
-        specifier: ^8.15.5
-        version: 8.15.5
+      dotenv:
+        specifier: ^17.2.1
+        version: 17.2.1
       pg:
         specifier: ^8.16.3
         version: 8.16.3
@@ -24,6 +24,9 @@ importers:
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.9
+      '@types/pg':
+        specifier: ^8.15.5
+        version: 8.15.5
       typescript:
         specifier: ^5.0.0
         version: 5.9.2
@@ -99,6 +102,10 @@ packages:
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
+
+  dotenv@17.2.1:
+    resolution: {integrity: sha512-kQhDYKZecqnM0fCnzI5eIv5L4cAe/iRI+HqMbO/hbRdTAeXDG+M9FjipUxNfbARuEg4iHIbhnhs78BCHNbSxEQ==}
+    engines: {node: '>=12'}
 
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
@@ -440,6 +447,8 @@ snapshots:
   data-uri-to-buffer@0.0.3: {}
 
   delayed-stream@1.0.0: {}
+
+  dotenv@17.2.1: {}
 
   ecc-jsbn@0.1.2:
     dependencies:
